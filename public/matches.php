@@ -6,7 +6,6 @@ $limit = 10;
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 $offset = ($page - 1) * $limit;
 
-// Filtros
 $filter_time = isset($_GET['time_id']) ? intval($_GET['time_id']) : 0;
 $filter_data_ini = isset($_GET['data_ini']) ? $_GET['data_ini'] : '';
 $filter_data_fim = isset($_GET['data_fim']) ? $_GET['data_fim'] : '';
@@ -14,7 +13,6 @@ $filter_data_fim = isset($_GET['data_fim']) ? $_GET['data_fim'] : '';
 $pdo = getPDO();
 $times = $pdo->query('SELECT id, nome FROM times ORDER BY nome')->fetchAll(PDO::FETCH_ASSOC);
 
-// Cadastro
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     $casa = intval($_POST['time_casa_id'] ?? 0);
     $fora = intval($_POST['time_fora_id'] ?? 0);
@@ -34,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     }
 }
 
-// Edição
 if (isset($_POST['edit_id'])) {
     $id = intval($_POST['edit_id']);
     $casa = intval($_POST['edit_time_casa_id'] ?? 0);
@@ -55,7 +52,6 @@ if (isset($_POST['edit_id'])) {
     }
 }
 
-// Exclusão
 if (isset($_POST['delete_id'])) {
     $id = intval($_POST['delete_id']);
     try {
@@ -67,7 +63,7 @@ if (isset($_POST['delete_id'])) {
     }
 }
 
-// Listagem com filtros e paginação
+
 $where = [];
 $params = [];
 if ($filter_time > 0) {

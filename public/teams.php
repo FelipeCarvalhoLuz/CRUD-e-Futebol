@@ -1,11 +1,8 @@
 <?php
 require_once __DIR__ . '/../src/db.php';
 
-// Mensagens
-
 $msg = '';
 
-// Lista de times da Série B (2025 - exemplo)
 $serieB = [
     'América-MG', 'Avaí', 'Botafogo-SP', 'Brusque', 'Ceará', 'Chapecoense',
     'CRB', 'Goiás', 'Guarani', 'Ituano', 'Mirassol', 'Novorizontino',
@@ -13,15 +10,12 @@ $serieB = [
     'Paysandu', 'Coritiba', 'Londrina'
 ];
 
-// Paginação
 $limit = 10;
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 $offset = ($page - 1) * $limit;
 
-// Filtro por nome
 default $filter_nome = isset($_GET['nome']) ? trim($_GET['nome']) : '';
 
-// Cadastro
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     $nome = trim($_POST['nome'] ?? '');
     $cidade = trim($_POST['cidade'] ?? '');
@@ -35,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     }
 }
 
-// Edição
 if (isset($_POST['edit_id'])) {
     $id = intval($_POST['edit_id']);
     $nome = trim($_POST['edit_nome'] ?? '');
@@ -50,11 +43,9 @@ if (isset($_POST['edit_id'])) {
     }
 }
 
-// Exclusão
 if (isset($_POST['delete_id'])) {
     $id = intval($_POST['delete_id']);
     $pdo = getPDO();
-    // Verifica dependências
     $hasPlayers = $pdo->prepare('SELECT COUNT(*) FROM jogadores WHERE time_id=?');
     $hasPlayers->execute([$id]);
     $hasMatches = $pdo->prepare('SELECT COUNT(*) FROM partidas WHERE time_casa_id=? OR time_fora_id=?');
@@ -68,7 +59,6 @@ if (isset($_POST['delete_id'])) {
     }
 }
 
-// Listagem com filtro e paginação
 $pdo = getPDO();
 $where = '';
 $params = [];
