@@ -26,3 +26,11 @@ CREATE TABLE partidas (
     FOREIGN KEY (time_casa_id) REFERENCES times(id),
     FOREIGN KEY (time_fora_id) REFERENCES times(id)
 );
+
+CREATE TABLE numeros_jogadores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    jogador_id INT NOT NULL,
+    numero_camisa INT NOT NULL,
+    temporada YEAR NOT NULL,
+    FOREIGN KEY (jogador_id) REFERENCES jogadores(id)
+);
