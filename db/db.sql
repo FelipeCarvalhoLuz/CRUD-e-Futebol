@@ -11,7 +11,7 @@ CREATE TABLE jogadores (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     posicao VARCHAR(30) NOT NULL,
-    numero_camisa INT NOT NULL,
+    numero INT NOT NULL,
     time_id INT,
     FOREIGN KEY (time_id) REFERENCES times(id)
 );
