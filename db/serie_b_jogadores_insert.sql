@@ -25,3 +25,4 @@ INSERT INTO jogadores (nome, posicao, numero_camisa, time_id) VALUES
 ('AméricaMG_RES11', 'ZAG', 23, (SELECT id FROM times WHERE nome='América-MG')),
 ('AméricaMG_RES12', 'LAT', 24, (SELECT id FROM times WHERE nome='América-MG')),
 ('AméricaMG_RES13', 'MEI', 25, (SELECT id FROM times WHERE nome='América-MG')),
+
